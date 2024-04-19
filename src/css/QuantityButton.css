@@ -1,0 +1,9 @@
+.button-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.Quantity-box{
+    color: white;
+}

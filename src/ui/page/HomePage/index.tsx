@@ -23,7 +23,7 @@ export default function HomePage() {
                 </div>
                 <ul className={`menu-items ${menuOpen ? 'active' : ''}`}>
                     <img src={carticon} width="30" height="25"/>
-                    <img src={usericon} width="28" height="25"/>
+                    <Link to="/login"><img src={usericon} width="28" height="25"/></Link>
                     <li><a href="#">About us</a></li>
                     <li><Link to="/product">Product</Link></li>
                 </ul>
