@@ -1,0 +1,164 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+/*HomePage logo Anime*/
+.logo-overlay {
+  position: absolute;
+  top: 50%; /* 將元素的上邊緣設置為父元素的中心 */
+  left: 50%; /* 將元素的左邊緣設置為父元素的中心 */
+  transform: translate(-50%, -50%); /* 使用 transform 屬性將元素移動到正中間 */
+  z-index: 1
+}
+
+.logo-overlay img {
+  width: auto; /* 設置 logo 的寬度 */
+  height: auto; /* 根據原始比例調整高度 */
+  animation: slideUp 2s ease-in-out forwards;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(0); /* 初始位置：不移動 */
+  }
+  100% {
+    transform: translateY(-170px); /* 結束位置：向上移動 100px */
+  }
+}
+/*HomePage logo Anime*/
+
+/*HomePage Background*/
+.HomePage {
+  height: 100vh;
+  background-image: url("../ui/img/HomePage_background.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+/*HomePage Menu*/
+.menu-container {
+  position: relative;
+  border: none;
+}
+
+.menu-icon {
+  cursor: pointer;
+  align-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
+  color: rgb(111,111,111);
+  margin-top: 3px;
+  margin-right: 7px;
+}
+
+.menu-items {
+  margin-top: 3px;
+  display: none;
+  position: fixed;
+  top: 0;
+  right: -200px; /* 起始位置在右側，距離右邊界 200px */
+  width: 90px; /* 設置菜單的寬度 */
+  background-color: rgb(111,111,111,0.2);
+  padding: 10px;
+  list-style: none;
+  border: none;
+  text-align: center;
+  transition: right 1s ease; /* 添加過渡效果 */
+}
+
+/* 當菜單顯示時，將其移動到畫面內 */
+.menu-items.active {
+  right: 0;
+}
+
+.menu-items li {
+  margin-bottom: 10px;
+}
+
+.menu-items li a {
+  color: #000;
+  text-decoration: none;
+}
+
+/* 鼠標懸停在菜單圖標上時顯示菜單 */
+.menu-container:hover .menu-items {
+  display: block;
+}
+
+/*HomePage Body*/
+.HomePage-body{
+  display: flex;
+  justify-content: center;
+  background-color: black;
+}
+
+.HomePage-body>*{
+ flex-grow: 1;
+}
+
+.supportlist{
+  width:40%;
+  list-style: none;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.x-Photographers{
+  width:20% ;
+  background-color: black;
+  color: white;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+
+}
+
+.follow-us{
+  width:40%;
+  padding-left: 30px;
+  background-color: black;
+  color: white;
+  text-align: left;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.social-media{
+  list-style: none;
+  display: block;
+  margin-top: 7px;
+}
+
+.social-media img{
+  margin-right: 10px;
+}
+/*HomePage Body*/
+
+/*HomePage Foorter*/
+.footer{
+  padding-right: 50px;
+  padding-left: 50px;
+  padding-bottom: 5px;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+
+.footer-items{
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  margin-top: 7px;
+}
+
+.footer-items li{
+  margin-right: 13px;
+}
+
+
+/*HomePage Foorter*/
