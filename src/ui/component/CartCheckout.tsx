@@ -1,9 +1,7 @@
 import {Box} from "@mui/material";
-import {useState} from "react";
 import Button from "@mui/material/Button";
 
 export default function CartCheckout (){
-    const [checkout, setCheckout] = useState<boolean>(false);
     return(
       <div>
           <Box sx={{
@@ -24,7 +22,6 @@ export default function CartCheckout (){
               }}>
 
                    <Button
-                       onClick={()=>{setCheckout(true)}}
                            variant="contained"
                            disableElevation
                            sx={{ bgcolor: '#3b3839',
@@ -41,12 +38,6 @@ export default function CartCheckout (){
                    CHECK OUT
                </Button>
               </div>
-              {
-                  checkout
-                  ?<p>10</p>
-                  :<></>
-
-              }
 
           </Box>
           <div>
