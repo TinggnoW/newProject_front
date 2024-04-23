@@ -7,6 +7,7 @@ import {IconButton, Typography} from "@mui/material";
 import QuantityButton from "./QuantityButton.tsx";
 import CloseIcon from '@mui/icons-material/Close';
 import "../../css/ProductDetails.css"
+import AddCartButton from "./AddCartButton.tsx";
 
 type Props = {
     open: boolean,
@@ -67,6 +68,7 @@ export const DialogComponent = ({ open, handleClose }:Props) => {
                     </IconButton>
                     <div className="ProductDetailQuantityButton">
                         <QuantityButton/>
+                        <AddCartButton/>
                     </div>
                 </DialogActions>
             </Dialog>

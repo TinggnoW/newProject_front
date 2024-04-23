@@ -1,6 +1,5 @@
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {IconButton} from "@mui/material";
 import React from "react";
 import "../../css/QuantityButton.css"
@@ -37,13 +36,6 @@ export default function QuantityButton() {
                     color: (theme) => theme.palette.grey[500],
                 }}>
                 <AddIcon/>
-            </IconButton>
-
-            <IconButton
-                sx={{
-                    color: (theme) => theme.palette.grey[500],
-                }}>
-                <AddShoppingCartIcon/>
             </IconButton>
 
         </div>

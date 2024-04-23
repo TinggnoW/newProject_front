@@ -1,33 +1,19 @@
 import "../../../css/HomePageCss.css"
-import menuicon from "../../icon/menu/menu.png"
-import carticon from "../../icon/shopping cart/shopping-cart.png"
-import usericon from "../../icon/User/person.png"
 import facebook from "../../icon/socialmedia/facebook.png"
 import youtube from "../../icon/socialmedia/youtube.png"
 import logo from "../../icon/logo/FUJI.png"
 import logotrans from "../../icon/logo/FUJI_trans.png"
-import {useState} from "react";
-import {Link} from "react-router-dom";
+import Navbar from "../../component/Navbar.tsx";
 
 
 export default function HomePage() {
-    const [menuOpen, setMenuOpen] = useState(false);
+
 
     return (
 
         <body>
         <div className='HomePage'>
-            <div className="menu-container">
-                <div className="menu-icon" onMouseEnter={() => setMenuOpen(!menuOpen)} onMouseLeave={() => setMenuOpen(menuOpen)}>
-                    <img src={menuicon} width="15" height="25"/>
-                </div>
-                <ul className={`menu-items ${menuOpen ? 'active' : ''}`}>
-                    <img src={carticon} width="30" height="25"/>
-                    <Link to="/login"><img src={usericon} width="28" height="25"/></Link>
-                    <li><a href="#">About us</a></li>
-                    <li><Link to="/product">Product</Link></li>
-                </ul>
-            </div>
+            <div className="HomePageNavbar"><Navbar/></div>
             <div className="logo-overlay">
                 <img src={logotrans} alt="FUJI_trans"/>
             </div>
@@ -46,12 +32,14 @@ export default function HomePage() {
                     <h5> X-Stories </h5></p>
             </div>
             <div className='follow-us'>
-            <p><h4> FOLLOW US </h4>
-                <h5> Global </h5>
-                <li className='social-media'>
-                    <img src={facebook} width="28" height="25"/>
-                    <img src={youtube} width="28" height="25"/>
-                </li></p>
+                <p>
+                    <h4> FOLLOW US </h4>
+                    <h5> Global </h5>
+                    <li className='social-media'>
+                        <img src={facebook} width="28" height="25"/>
+                        <img src={youtube} width="28" height="25"/>
+                    </li>
+                </p>
             </div>
         </div>
         <footer className='footer'>

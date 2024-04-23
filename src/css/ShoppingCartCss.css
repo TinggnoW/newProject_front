@@ -6,20 +6,41 @@
     background-size: cover;
     background-position: center center;
     z-index: 0;
-
 }
 
-.layer{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%; /* Cover the entire width of the container */
-    height: 100%; /* Cover the entire height of the container */
-    background-color: rgba(111, 111, 111, 0.75);
-    z-index: 1;
-
+.wordbackground1 {
+    display: flex;
+    color: #8d8f93;
+    font-size: 70px; /* Adjust the font size to your preference */
+    justify-content: flex-end; /* Align the content to the right */
+    flex-direction: column;
+    position: absolute; /* Position it absolutely to the right side */
+    top: 650px; /* Adjust the vertical position if needed */
+    right: 60px; /* Move it to the right side */
+    text-shadow:10px 2px 7px rgba(0, 0, 0, 0.7);
+    z-index: 3;
+}
+.wordbackground2{
+    display: flex;
+    color: #8d8f93;
+    font-size: 80px; /* Adjust the font size to your preference */
+    justify-content: flex-end; /* Align the content to the right */
+    flex-direction: column;
+    position: absolute; /* Position it absolutely to the right side */
+    top: 800px; /* Adjust the vertical position if needed */
+    right: 63px; /* Move it to the right side */
+    text-shadow:8px 2px 7px rgba(0, 0, 0, 0.7);
+    z-index: 4;
 }
 
-.table{
-    z-index: 2;
+/*scrollbar*/
+
+::-webkit-scrollbar {
+    width: 0; /* Width of the scrollbar */
+}
+
+.ShoppingCartContainer{
+    display: flex;
+    flex-direction: row;
+
 }
