@@ -7,12 +7,13 @@ import 'swiper/css/pagination';
 import { EffectCoverflow, Pagination,Autoplay } from 'swiper/modules';
 import {DialogComponent} from '../../component/ProductDetailDialog.tsx'
 import Navbar from "../../component/Navbar.tsx";
-import { getAllProduct } from '../../../api/ProductApi.ts'; // Import the API function
+import { getAllProduct } from '../../../api/ProductApi.ts';
+import {GetAllProduct} from "../../../data/product/getAllProductData.Type.ts"; // Import the API function
 
 
 export default function ProductPage (){
     const [dialogOpen, setDialogOpen] = useState(false);
-    const [products, setProducts] = useState<any[]>([]);
+    const [products, setProducts] = useState<GetAllProduct[]>([]);
 
     useEffect(() => {
         // Fetch product data when component mounts
@@ -56,7 +57,7 @@ export default function ProductPage (){
                             slideShadows: true,
                         }}
                         autoplay={{
-                            delay: 1000,
+                            delay: 1200,
                             pauseOnMouseEnter: true
 
                         }}
@@ -66,17 +67,16 @@ export default function ProductPage (){
                     >
                         {/* Render product data dynamically */}
                         {products.map((product) => (
-                            <SwiperSlide key={product.id} onClick={handleSliderClick}>
-                                <img src={product.image} />
+                            <SwiperSlide key={product.pid} onClick={handleSliderClick}>
+                                <img src={product.imageUrl} />
                                 <div className="overlay-text">
-                                    <p>Product: {product.name}</p>
-                                    <p>Price: {product.price}</p>
+                                    <p>{product.productName}</p>
+                                    <p>Price: $ {product.productPrice}</p>
                                 </div>
                             </SwiperSlide>
                         ))}
                     </Swiper>
                     <DialogComponent open={dialogOpen} handleClose={handleCloseDialog}/>
-
                 </div>
             </div>
         </header>

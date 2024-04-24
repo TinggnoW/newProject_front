@@ -83,19 +83,19 @@
 
 .swiper {
     width: 100%;
-    height: 80%;
+    height: 50%;
     padding-left: 0;
     padding-right: 0;
 }
 
 .swiper-slide {
-    background-position: center;
-    background-size: cover;
-    background-color: transparent;
-    object-fit: cover;
-    width: 600px;
-    height: 400px;
-    filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: transparent; /* Make the slide background transparent */
+    filter: none;
 }
 
 .swiper-slide-active{
@@ -103,14 +103,19 @@
 }
 
 .swiper-slide img {
-    display: block;
-    width: 480px;
-    height: 100%;
-    object-fit: cover;
-    filter: blur(0px);
+    width: auto; /* Reset the width */
+    max-width: 60%; /* Set the maximum width to 60% of the slide */
+    height: auto; /* Reset the height */
+    max-height: 70%; /* Set the maximum height to 70% of the slide */
+    object-fit: contain; /* Ensure the image is contained within the slide */
+    /*filter: blur(0px);*/
 }
 
 .overlay-text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-wrap: none;
     position: absolute;
     z-index: 999;
     color: white;
