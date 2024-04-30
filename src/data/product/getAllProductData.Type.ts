@@ -4,6 +4,6 @@ export interface GetAllProduct {
     imageUrl:     string;
     productPrice: number;
     hasStock:     boolean;
-    stock:        number
+    stock:        number;
     description:  string;
 }

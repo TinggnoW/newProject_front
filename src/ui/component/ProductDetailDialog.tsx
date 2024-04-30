@@ -3,76 +3,137 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import {IconButton, Typography} from "@mui/material";
+import {Divider, IconButton, Typography} from "@mui/material";
 import QuantityButton from "./QuantityButton.tsx";
 import CloseIcon from '@mui/icons-material/Close';
 import "../../css/ProductDetails.css"
-import AddCartButton from "./AddCartButton.tsx";
+import {GetProductbyId} from "../../data/product/getProductbyIdData.Type.ts";
+import {useEffect, useState} from "react";
+import * as CartItemApi from "../../api/CartApi.ts";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 type Props = {
     open: boolean,
     handleClose: () => void,
+    getProductbyId: (pid: number) => Promise<GetProductbyId>, // Pass the API function as a prop
+    productId: number, // Pass the productId as a prop to fetch product details
+
 }
 
 
-export const DialogComponent = ({ open, handleClose }:Props) => {
+export const DialogComponent = ({ open, handleClose, getProductbyId, productId }:Props) => {
+    const [product, setProduct] = useState<GetProductbyId | null>(null); // Declare product state
+    const [quantity, setQuantity] = useState<number>(1);
+
+
+    useEffect(() => {
+        const fetchProductData = async () => {
+            try {
+                const data = await getProductbyId(productId); // Call the getProductbyId API function
+                setProduct(data); // Update state with fetched product data
+            } catch (error) {
+                console.error('Error fetching product data:', error);
+            }
+        };
+
+        if (open && productId) {
+            setQuantity(1)// Only fetch data if dialog is open and productId is provided
+            fetchProductData();
+        }
+    }, [open, productId, getProductbyId]);
+
+    if (!open || !product) {
+        return null; // Don't render the dialog if it's not open or product data is not available
+    }
+
+    const handleAddCart = async ()=>{
+        try {
+            await CartItemApi.putCartItem(productId,quantity);
+        } catch (error) {
+            console.error('Error fetching product data:', error);
+        }
+    }
+
+    const handleIncrease = () => {
+        setQuantity(quantity + 1);
+    };
+
+    const handleDecrease = () => {
+        if (quantity > 1) {
+            setQuantity(quantity - 1);
+        }
+    };
+
     return (
         <div className="productDialog-container">
             <Dialog className="dialog" open={open} onClose={handleClose}
-                    sx={{'& .MuiDialog-paper': {
-                            backgroundColor: 'rgb(111,111,111,0.89)',
-                            maxWidth: '70%',
-                            width: '100%',
-                            height: '80%',
-                            borderRadius: '0px',
-                            boxShadow: '0 0 13px rgba(255, 255, 255, 0.36)'
-                        },
-            }}>
+                    sx=
+                        {{'& .MuiDialog-paper':
+                            {
+                                backgroundColor: 'rgb(111,111,111,0.89)',
+                                maxWidth: '70%',
+                                width: '100%',
+                                height: '80%',
+                                borderRadius: '0px',
+                                boxShadow: '0 0 13px rgba(255, 255, 255, 0.36)'
+                            }
+                        }}>
                 <DialogTitle className="DialogProductName">
-                    「N」が象徴する知性、
-                    常に進化を続けるスタンダード
+                         {product.productName}
                 </DialogTitle>
                 <DialogContent dividers
-                   sx={{
-                       display: 'flex',
-                       alignItems: 'flex-start'
-                }} >
-                    <img
-                        src="https://fujifilm-x.com/wp-content/uploads/2018/12/dimitris-paterakis_89_animal_01.jpg"
-                        style={{
-                            width:'50%',
-                            marginRight: '10px'
-                        }}
-                    />
-                    <DialogContentText gutterBottom>
-                        多くのファッショニスタに愛される〈ニューバランス〉は、シンプルな「N」のロゴマークと圧倒的な履き心地で知られるスニーカーのスタンダード。その歴史は古く、1906年、アメリカ・ボストンで創業者であるウィリアム・J・ライリーによって、矯正用シューズメーカーとして創業。ブランド名は「履いた人に新しい（new）バランス(balance)感覚をもたらす」ことから付けられた。60年代には医学的知識に基づく矯正シューズのノウハウを生かし、世界で初めてカスタムメイドのランニングシューズを世に出す。転機が訪れたのは1972年。その品質に惚れ込んだジェームス・S・デービス（現・取締役会長）が会社を買い取り、本格的にランニングシューズの生産に着手。ランナーとしても知られていたデービスは、自らが履いて走ることで「インステップレーシング」というニューバランス独自の技術を確立する。さらにグローバル戦略によりブランドとして飛躍的な成長を遂げたのはご存知の通り。
-                        <Typography gutterBottom></Typography>
-                        <Typography gutterBottom></Typography>
-                        <Typography gutterBottom></Typography>
-                        <Typography gutterBottom>Price: 280000</Typography>
-                        <Typography gutterBottom>Stock: 2</Typography>
-                    </DialogContentText>
+                   sx=
+                       {{
+                           display: 'flex',
+                           alignItems: 'flex-start',
+                        }}>
+                                <img src={product.imageUrl} alt={product.productName} style={{ width: '50%', marginRight: '1vw' }} />
+                                <DialogContentText gutterBottom
+                                    sx=
+                                        {{
+                                            color: 'white',
+                                        }}
+                                >
+                                    {product.description}
+                                    <Divider
+                                        sx=
+                                            {{
+                                                marginBottom: '2vh',
+                                                marginTop:'40vh'
+                                            }}
+                                    />
+                                        <Typography gutterBottom>HKD: {product.productPrice}</Typography>
+                                        <Typography gutterBottom>Stock: {product.stock}</Typography>
+
+                                </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <IconButton
-                        aria-label="close"
-                        onClick={handleClose}
-                        sx={{
-                            position: 'absolute',
-                            right: 8,
-                            top: 8,
-                            color: (theme) => theme.palette.grey[500],
-                        }}
-                    >
-                        <CloseIcon />
-                    </IconButton>
+                                <IconButton aria-label="close" onClick={handleClose}
+                                    sx=
+                                        {{
+                                            position: 'absolute',
+                                            right: 8,
+                                            top: 8,
+                                            color: (theme) => theme.palette.grey[500],
+                                        }}>
+                                    <CloseIcon />
+                                </IconButton>
                     <div className="ProductDetailQuantityButton">
-                        <QuantityButton/>
-                        <AddCartButton/>
+                        <QuantityButton quantityDto={quantity} handleIncrease={handleIncrease} handleDecrease={handleDecrease}/>
+                        <IconButton
+                            onClick={handleAddCart}
+                                    sx={{
+                                        color: (theme) => theme.palette.grey[500],
+                                    }}>
+                            <AddShoppingCartIcon/>
+                        </IconButton>
                     </div>
                 </DialogActions>
             </Dialog>
         </div>
     );
 };
+
+
+
 

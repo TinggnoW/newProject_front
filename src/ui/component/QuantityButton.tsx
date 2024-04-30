@@ -1,21 +1,18 @@
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import {IconButton} from "@mui/material";
-import React from "react";
 import "../../css/QuantityButton.css"
 
-export default function QuantityButton() {
-    const [quantity, setQuantity] = React.useState(1);
+type Props= {
+    quantityDto: number;
+    handleIncrease:()=>void;
+    handleDecrease:()=>void;
 
-    const handleIncrease = () => {
-        setQuantity(quantity + 1);
-    };
 
-    const handleDecrease = () => {
-        if (quantity > 1) {
-            setQuantity(quantity - 1);
-        }
-    };
+}
+
+export default function QuantityButton({quantityDto,handleIncrease,handleDecrease}: Props) {
+
 
     return (
         <div className="button-container">
@@ -28,7 +25,7 @@ export default function QuantityButton() {
                 <RemoveIcon/>
             </IconButton>
 
-            <div className="Quantity-box">{quantity}</div>
+            <div className="Quantity-box">{quantityDto}</div>
 
             <IconButton
                 onClick={handleIncrease}

@@ -3,6 +3,7 @@ import HomePage from "../ui/page/HomePage";
 import ProductPage from "../ui/page/ProductPage";
 import LoginPage from "../ui/page/LoginPage";
 import ShoppingCart from "../ui/page/ShoppingCart";
+import TransactionPage from "../ui/page/TransactionPage";
 
 
 export const router = createBrowserRouter([
@@ -22,17 +23,13 @@ export const router = createBrowserRouter([
         path: "/login",
         element: <LoginPage/>
     },
-    // {
-    //     path: "/checkout/:transactionId",
-    //     element: <Checkout/>
-    // },
+    {
+        path: "/checkout/:transactionId",
+        element: <TransactionPage/>
+    },
     // {
     //     path: "/thankyou",
     //     element: <ThankYou/>
-    // }
-    // {
-    //     path: "/product/:pid/",
-    //     element: <ProductDetails/>
-    // }
+    // },
 ])
 

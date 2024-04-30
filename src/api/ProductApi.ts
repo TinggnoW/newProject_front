@@ -1,11 +1,13 @@
 import axios from "axios";
 import {GetAllProduct} from "../data/product/getAllProductData.Type.ts";
 import {GetProductbyId} from "../data/product/getProductbyIdData.Type.ts";
+import getEnvConfig from "../config/EnvConfig.ts";
 
+const baseURL = getEnvConfig().baseUrl;
 
 export const getAllProduct = async (): Promise<GetAllProduct[]> => {
     try {
-        const apiUrl = "http://localhost:8080/public/product";
+        const apiUrl = baseURL+"/public/product";
         const response = await axios.get<GetAllProduct[]>(apiUrl);
         return response.data;
     } catch (error) {
@@ -14,9 +16,9 @@ export const getAllProduct = async (): Promise<GetAllProduct[]> => {
     }
 }
 
-export const getProductbyId = async (pid: string): Promise<GetProductbyId> => {
+export const getProductbyId = async (pid: number): Promise<GetProductbyId> => {
     try {
-        const apiUrl = `http://localhost:8080/public/product/` + pid;
+        const apiUrl = baseURL+`/public/product/`+ pid;
         const response = await axios.get<GetProductbyId>(apiUrl);
         return response.data;
     } catch (error) {

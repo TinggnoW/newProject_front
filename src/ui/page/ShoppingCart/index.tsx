@@ -1,34 +1,55 @@
 import "../../../css/ShoppingCartCss.css"
 import ShoppingCartTable from "../../component/ShoppingCartTable.tsx"
 import Navbar from "../../component/Navbar.tsx";
+import * as CartItemApi from "../../../api/CartApi.ts";
+import {useContext, useEffect, useState} from "react";
+import {CartItemData} from "../../../data/product/cartItemData.Type.ts";
+import {UserData} from "../../../data/user/UserData.ts";
+import {LoginUserContext} from "../../../context/LoginUserContext.ts";
+import {Box} from "@mui/material";
+import CartCheckout from "../../component/CartCheckout.tsx";
+
+
 
 export default function ShoppingCart(){
 
+    const [cartItem, setCartItem] = useState<CartItemData[]|undefined>(undefined);
+    const loginUser = useContext<UserData|null|undefined>(LoginUserContext);
+    // Fetch product data when component mounts
+    const fetchProductData = async () => {
+        try {
+            const data = await CartItemApi.getCartItem(); // Call the API function
+            setCartItem(data); // Update state with fetched data
+            console.log(data);
+        } catch (error) {
+            console.error('Error fetching product data:', error);
+        }
+    };
+
+    useEffect(() => {
+
+        if(loginUser){fetchProductData().then();}
+
+    }, [loginUser]);
+
     return(
-        <body>
+        <>
 
-        <div className="ShoppingCart">
-            <div className="layer" style={{
-                position: 'relative',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                backgroundColor: 'rgba(111, 111, 111, 0.81)',
-                zIndex: 3
-            }}>
+        <Box className="ShoppingCart">
+            <Box className="ShoppingCartlayer">
                 <Navbar/>
-                <div className="wordbackground1">
-                    <h1>SHOPPING</h1>
+                <div className="ShoppingCartContainer">
+                    {
+                        cartItem
+                            ?<ShoppingCartTable dto={cartItem} setCartItemData={setCartItem}/>
+                            :<></>
+                    }
+                    <CartCheckout/>
                 </div>
-                <div className="wordbackground2">
-                    <h2>CART</h2>
-                </div>
-                    <ShoppingCartTable/>
-            </div>
 
-        </div>
-        </body>
+            </Box>
+        </Box>
+        </>
 
     );
 }

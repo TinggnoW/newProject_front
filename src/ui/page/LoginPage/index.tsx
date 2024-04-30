@@ -3,11 +3,11 @@ import {Input, Button, Alert} from '@mui/material';
 import Card from "@mui/material/Card";
 import "../../../css/LoginPageCss.css"
 import Navbar from "../../component/Navbar.tsx";
-import {ChangeEvent, useContext, useEffect, useState} from "react";
+import {ChangeEvent, useState} from "react";
 import * as FirebaseAuthService from "../../../authService/FirebaseAuthService.ts";
 import {NavigateFunction, useNavigate} from "react-router-dom";
-import {UserData} from "../../../data/user/UserData.ts";
-import {LoginUserContext} from "../../../context/LoginUserContext.ts";
+// import {UserData} from "../../../data/user/UserData.ts";
+// import {LoginUserContext} from "../../../context/LoginUserContext.ts";
 
 export default function LoginPage()  {
     const [email, setEmail] = useState<string>("");
@@ -15,7 +15,7 @@ export default function LoginPage()  {
     const [isLoginFailed, setIsLoginFailed] = useState<boolean>(false);
 
     const navigate:NavigateFunction = useNavigate();
-    const loginUser=useContext<UserData|null|undefined>(LoginUserContext);
+    // const loginUser=useContext<UserData|null|undefined>(LoginUserContext);
 
     const handleEmailChange = (event:ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);

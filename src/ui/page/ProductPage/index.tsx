@@ -7,13 +7,14 @@ import 'swiper/css/pagination';
 import { EffectCoverflow, Pagination,Autoplay } from 'swiper/modules';
 import {DialogComponent} from '../../component/ProductDetailDialog.tsx'
 import Navbar from "../../component/Navbar.tsx";
-import { getAllProduct } from '../../../api/ProductApi.ts';
+import {getAllProduct, getProductbyId} from '../../../api/ProductApi.ts';
 import {GetAllProduct} from "../../../data/product/getAllProductData.Type.ts"; // Import the API function
 
 
 export default function ProductPage (){
     const [dialogOpen, setDialogOpen] = useState(false);
-    const [products, setProducts] = useState<GetAllProduct[]>([]);
+    const [products, setProducts] = useState<GetAllProduct[]|undefined>(undefined);
+    const [selectedProductId, setSelectedProductId] = useState<number>(0);
 
     useEffect(() => {
         // Fetch product data when component mounts
@@ -26,18 +27,20 @@ export default function ProductPage (){
             }
         };
 
-        fetchProductData();
+        fetchProductData().then();
     }, []);
 
-
-    const handleSliderClick = () => {
+    const handleSliderClick = (productId: number) => {
+        setSelectedProductId(productId);
         setDialogOpen(true);
     };
     const handleCloseDialog = () => {
         setDialogOpen(false);
     };
+
+
     return(
-        <body>
+        <>
         <header className='ProductPage'>
             <div className="layer">
                 <div>
@@ -54,7 +57,7 @@ export default function ProductPage (){
                             stretch: 0,
                             depth: 100,
                             modifier: 1,
-                            slideShadows: true,
+                            slideShadows: false,
                         }}
                         autoplay={{
                             delay: 1200,
@@ -62,101 +65,38 @@ export default function ProductPage (){
 
                         }}
                         pagination={true}
-                        modules={[Autoplay, EffectCoverflow, Pagination]}
+                        modules={[EffectCoverflow, Pagination,Autoplay]}
                         className="mySwiper"
                     >
                         {/* Render product data dynamically */}
-                        {products.map((product) => (
-                            <SwiperSlide key={product.pid} onClick={handleSliderClick}>
-                                <img src={product.imageUrl} />
+                        {products?.map((product) => (
+                            <SwiperSlide key={product.pid}
+                                         onClick={() => handleSliderClick(product.pid)}
+                            >
+                                <img src={product.imageUrl} alt="product"/>
                                 <div className="overlay-text">
-                                    <p>{product.productName}</p>
-                                    <p>Price: $ {product.productPrice}</p>
+                                    <p>
+                                    {product.productName}<br/>
+                                    HKD {product.productPrice}
+                                    </p>
                                 </div>
                             </SwiperSlide>
                         ))}
                     </Swiper>
-                    <DialogComponent open={dialogOpen} handleClose={handleCloseDialog}/>
+                    <DialogComponent
+                        open={dialogOpen}
+                        handleClose={handleCloseDialog}
+                        getProductbyId={getProductbyId}
+                        productId={selectedProductId}
+                    />
                 </div>
             </div>
         </header>
-        </body>
+        </>
 
 
     )
 }
 
-// <SwiperSlide onClick={handleSliderClick}>
-//     <img
-//         src="src/ui/img/product/gfx000.png"/>
-//     <div className="overlay-text">
-//         <p> Product: Night</p>
-//         <p> Price: HKD10000 </p>
-//     </div>
-// </SwiperSlide>
-// <SwiperSlide onClick={handleSliderClick}>
-//     <img
-//         src="https://fujifilm-x.com/wp-content/uploads/2024/02/Dimitrios-Paterakis_109_Landscape_01.jpg"/>
-//     <div className="overlay-text">
-//         <p> Product: Day</p>
-//         <p> Price: HKD200000 </p>
-//     </div>
-// </SwiperSlide>
-// <SwiperSlide onClick={handleSliderClick}>
-//     <img
-//         src="https://fujifilm-x.com/wp-content/uploads/2024/02/Dimitrios-Paterakis_109_Landscape_04.jpg"/>
-//     <div className="overlay-text">
-//         <p> Product: Dawn</p>
-//         <p> Price: HKD34500 </p>
-//     </div>
-// </SwiperSlide>
-// <SwiperSlide onClick={handleSliderClick}>
-//     <img
-//         src="https://fujifilm-x.com/wp-content/uploads/2023/05/20230515-Mr.Whisper_109works_Street_002.jpg"/>
-//     <div className="overlay-text">
-//         <p> Product: Night</p>
-//         <p> Price: HKD10000 </p>
-//     </div>
-// </SwiperSlide>
-// <SwiperSlide onClick={handleSliderClick}>
-//     <img
-//         src="https://fujifilm-x.com/wp-content/uploads/2024/02/Dimitrios-Paterakis_109_Landscape_01.jpg"/>
-//     <div className="overlay-text">
-//         <p> Product: Day</p>
-//         <p> Price: HKD200000 </p>
-//     </div>
-// </SwiperSlide>
-// <SwiperSlide onClick={handleSliderClick}>
-//     <img
-//         src="https://fujifilm-x.com/wp-content/uploads/2024/02/Dimitrios-Paterakis_109_Landscape_04.jpg"/>
-//     <div className="overlay-text">
-//         <p> Product: Dawn</p>
-//         <p> Price: HKD34500 </p>
-//     </div>
-// </SwiperSlide>
-// <SwiperSlide onClick={handleSliderClick}>
-//     <img
-//         src="https://fujifilm-x.com/wp-content/uploads/2023/05/20230515-Mr.Whisper_109works_Street_002.jpg"/>
-//     <div className="overlay-text">
-//         <p> Product: Night</p>
-//         <p> Price: HKD10000 </p>
-//     </div>
-// </SwiperSlide>
-// <SwiperSlide onClick={handleSliderClick}>
-//     <img
-//         src="https://fujifilm-x.com/wp-content/uploads/2024/02/Dimitrios-Paterakis_109_Landscape_01.jpg"/>
-//     <div className="overlay-text">
-//         <p> Product: Day</p>
-//         <p> Price: HKD200000 </p>
-//     </div>
-// </SwiperSlide>
-// <SwiperSlide onClick={handleSliderClick}>
-//     <img
-//         src="https://fujifilm-x.com/wp-content/uploads/2024/02/Dimitrios-Paterakis_109_Landscape_04.jpg"/>
-//     <div className="overlay-text">
-//         <p> Product: Dawn</p>
-//         <p> Price: HKD34500 </p>
-//     </div>
-// </SwiperSlide>
 
 
