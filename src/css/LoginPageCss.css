@@ -10,7 +10,7 @@
     flex-direction: column;
     /*align-items: center;*/
     height: 100vh;
-    background-image: url('https://fujifilm-x.com/wp-content/uploads/2024/02/Dimitrios-Paterakis_109_Landscape_08.jpg');
+    background-image: url('src/ui/img/Background/Login/Login.jpeg');
     background-size: cover;
     background-position: center center;
 }

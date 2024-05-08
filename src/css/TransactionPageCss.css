@@ -1,7 +1,7 @@
 .transactionPage{
     position: relative;
     height: 100vh;
-    background-image: url("https://images.squarespace-cdn.com/content/v1/5852ece3e6f2e1ac624051fb/1bcd5478-04f1-4d1d-b5ce-bd1204fd8545/Lava2.jpg?format=2500w");
+    background-image: url('src/ui/img/Background/Transaction/transaction.jpeg');
     background-size: cover;
     background-position: center center;
     z-index: 0;

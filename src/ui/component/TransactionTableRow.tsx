@@ -37,34 +37,44 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
 
 
 export default function TransactionTableRow ({data}:Props){
-    // const handleDeleteCartItem = async (pid:number)=>{
-    //     try {
-    //         await CartItemApi.deleteCartItem(pid);
-    //         const latestDto=dto.filter((updateData)=> (updateData.pid!==pid
-    //             )
-    //         )
-    //         setCartItemData(latestDto);
-    //         console.log('Delete CartItem',pid);
-    //     } catch (error) {
-    //         console.error('Error fetching product data:', error);
-    //     }
-    // }
 
     return(
         <StyledTableRow >
-            <StyledTableCell component="th" scope="row">
-                <img src={data.product.imageUrl} height='160px'/>
+            <StyledTableCell
+                style={{
+                    maxWidth: '200px',
+                    }}
+                component="th" scope="row">
+                <img src={data.product.imageUrl} height='160px' width='160px'/>
             </StyledTableCell>
-            <StyledTableCell style={{maxWidth: '200px'}} align="left">
+            <StyledTableCell
+                style= {{
+                        maxWidth: '200px',
+                        fontFamily: "'Forum', serif",
+                        fontWeight: 400,
+                        fontStyle: 'normal',
+                        }}
+                align="center">
                 {data.product.productName}
             </StyledTableCell>
-            <StyledTableCell style={{maxWidth: '120px'}} align="center">
+            <StyledTableCell
+                style={{maxWidth: '120px',
+                        fontFamily: "'Forum', serif",
+                        fontWeight: 400,
+                        fontStyle: 'normal',}}
+                             align="center">
                 $&nbsp;{data.subtotal}
             </StyledTableCell>
-            <StyledTableCell style={{maxWidth: '120px'}} align="center">
+            <StyledTableCell
+                style={{
+                        maxWidth: '120px',
+                        fontFamily: "'Forum', serif",
+                        fontWeight: 400,
+                        fontStyle: 'normal'
+                        }}
+                align="center">
                 {data.quantity}
             </StyledTableCell>
-
         </StyledTableRow>
 
     )

@@ -9,77 +9,120 @@ import Button from '@mui/joy/Button';
 import InfoOutlined from '@mui/icons-material/InfoOutlined';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import {Box} from "@mui/material";
+import * as TransactionApi from "../../api/TransactionApi.ts";
+import {TransactionDto} from "../../data/transaction/TransactionDataType.ts";
+import {useNavigate} from "react-router-dom";
 
-export default function CreditCardForm() {
+type Props = {
+    dto: TransactionDto;
+}
+
+export default function CreditCardForm({dto}: Props) {
+    const navigate = useNavigate();
+    const handlePayment = async () => {
+        try {
+            await TransactionApi.payTransaction(dto.tid.toString());
+            await TransactionApi.finishTransactionByTid(dto.tid.toString());
+            navigate(`/thankyou`);
+        } catch (error) {
+            console.error('Error fetching product data:', error);
+        }
+    };
+
     return (
-        <Box  sx={{
-                display: 'grid',
-                justifyContent: 'flex-end',
-                paddingRight: '2rem',
-                paddingTop:'14rem',
+        <Box sx={{
+            display: 'grid',
+            width: '40vw',
+            position: 'relative',
+            // top:'5%',
+            paddingLeft:'3rem'
+            // paddingTop:'14rem',
+
         }}>
             <Card
-            variant="outlined"
-            sx={{
-                backgroundColor: 'rgb(111,111,111,1)',
-                boxShadow: '0 0 15px rgba(255, 255, 255, 0.5)',
-                borderRadius: '1px',
-                border:0,
-                Width: '35%',
-                margin: 'auto',
-                display: 'grid',
-                placeItems: 'center',
-                gap:'1rem',
-            }}
-        >
-
-            <Divider inset="none" />
-            <CardContent
+                variant="outlined"
                 sx={{
+                    backgroundColor: 'rgba(66,62,62,0.45)',
+                    boxShadow: '0 0 20px rgba(130, 99, 92, 1)',
+                    borderRadius: '1px',
+                    border: 0,
+                    width: '30vw',
+                    margin: 'auto',
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(2, minmax(80px, 1fr))',
-                    gap: 3,
+                    gap: '1rem',
+
                 }}
             >
-                <FormControl sx={{ gridColumn: '1/-1' }}>
-                    <FormLabel>Card number</FormLabel>
-                    <Input endDecorator={<CreditCardIcon />} />
-                </FormControl>
-                <FormControl>
-                    <FormLabel>Expiry date</FormLabel>
-                    <Input endDecorator={<CreditCardIcon />} />
-                </FormControl>
-                <FormControl>
-                    <FormLabel>CVC/CVV</FormLabel>
-                    <Input endDecorator={<InfoOutlined />} />
-                </FormControl>
-                <FormControl sx={{ gridColumn: '1/-1' }}>
-                    <FormLabel>Card holder name</FormLabel>
-                    <Input placeholder="Enter cardholder's full name" />
-                </FormControl>
-                <CardActions sx={{ gridColumn: '1/-1' }}>
-                    <Button
-                        sx={{
-                            position: 'absolute',
-                            bgcolor: '#3b3839',
-                            color: 'white',
-                            width: '65%',
-                            height: '8%',
-                            left: '18%',
-                            bottom:'-4.5%',
 
-                            borderRadius: '1px',
-                            '&:hover': {
-                                bgcolor: '#e2e1e1',
-                                boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.2)',
-                                color: 'black',
-                            }
-                        }}>
-                        Pay
-                    </Button>
-                </CardActions>
-            </CardContent>
-        </Card>
+                <Divider inset="none"/>
+                <CardContent
+                    sx={{
+                        display: 'grid',
+                        gridTemplateColumns: ['repeat(2, minmax(80px, 1fr))'],
+                        gap: 3,
+                    }}
+                >
+                    <FormControl sx={{gridColumn: '1/-1'}}>
+                        <FormLabel
+                            sx={{
+                                fontFamily: "'Forum', serif",
+                                fontWeight: 400,
+                            }}>
+                            Card number
+                        </FormLabel>
+                        <Input endDecorator={<CreditCardIcon/>}/>
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel sx={{
+                            fontFamily: "'Forum', serif",
+                            fontWeight: 400,
+
+                        }}>Expiry date</FormLabel>
+                        <Input endDecorator={<CreditCardIcon/>}/>
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel sx={{
+                            fontFamily: "'Forum', serif",
+                            fontWeight: 400,
+                        }}>CVC/CVV</FormLabel>
+                        <Input endDecorator={<InfoOutlined/>}/>
+                    </FormControl>
+                    <FormControl sx={{gridColumn: '1/-1'}}>
+                        <FormLabel sx={{
+                            fontFamily: "'Forum', serif",
+                            fontWeight: 400,
+                        }}>Card holder name</FormLabel>
+                        <Input sx={{
+                            fontFamily: "'Forum', serif",
+                            fontWeight: 400,
+                        }}
+                               placeholder="Enter cardholder's full name"/>
+                    </FormControl>
+                    <CardActions sx={{gridColumn: '1/-1'}}>
+                        <Button
+                            sx={{
+                                position: 'absolute',
+                                width: '30%',
+                                fontFamily: "'Forum', serif",
+                                fontWeight: 400,
+                                left: '34%',
+                                top: '94%',
+                                backgroundColor: '#3b3839',
+                                borderRadius: '1px',
+                                '&:hover': {
+                                    color: 'black',
+                                    backgroundColor: '#e2e1e1',
+                                    boxShadow: '0 0 5px rgba(0, 0, 0, 0.2)'
+                                },
+                                letterSpacing: '3px',
+                            }}
+                            onClick={handlePayment}
+                        >
+                            Pay
+                        </Button>
+                    </CardActions>
+                </CardContent>
+            </Card>
         </Box>
 
     );

@@ -3,6 +3,7 @@ import {GetAllProduct} from "../data/product/getAllProductData.Type.ts";
 import {GetProductbyId} from "../data/product/getProductbyIdData.Type.ts";
 import getEnvConfig from "../config/EnvConfig.ts";
 
+
 const baseURL = getEnvConfig().baseUrl;
 
 export const getAllProduct = async (): Promise<GetAllProduct[]> => {

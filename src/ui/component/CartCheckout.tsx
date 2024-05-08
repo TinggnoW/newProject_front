@@ -1,9 +1,16 @@
 import {Box, Typography} from "@mui/material";
 import Button from "@mui/material/Button";
+import Divider from '@mui/joy/Divider';
 import {useNavigate} from "react-router-dom";
 import * as TransactionApi from "../../api/TransactionApi.ts";
+import "../../css/CartCheckoutCss.css"
 
-export default function CartCheckout (){
+
+type Props = {
+    total: number
+}
+
+export default function CartCheckout({total}: Props) {
     const navigate = useNavigate();
 
     const handleCheckout = async () => {
@@ -14,77 +21,57 @@ export default function CartCheckout (){
             console.error('Error fetching product data:', error);
         }
     };
-    return(
+    return (
 
-        <Box sx={{
-            position:'relative',
-            width: "40vw",
-            height: "60vh",
-            marginTop: '3vh',
-            marginRight: '2vh',
-            marginLeft: '2vh',
-            backgroundColor: 'rgb(111,111,111,1)',
-            boxShadow: '0 0 15px rgba(255, 255, 255, 0.5)',
-
-        }}>
-
-                <Typography sx={{
-                    position: 'absolute',
-                    fontSize:{lg:'40px'},
-                    color: 'white',
-                    top: '8%',
-                    marginLeft: '2vw',
-                }}>
-                    $&nbsp;3459080000
-                </Typography>
-                <Typography sx={{
-                    position: 'absolute',
-                    fontSize:{lg:'20px'},
-                    color: 'white',
-                    top: '20%',
-                    marginLeft: '2vw',
-
-                }}>
-                    Get 3% Discount ($&nbsp;3459042000)
-                </Typography>
-                <Typography sx={{
-                    position: 'absolute',
-                    fontSize:{lg:'10px'},
-                    color: 'white',
-                    top: '40%',
-                    marginLeft: '2vw',
-
-                }}>
-                    GET FUJI CARE <br/>
-                    FUJICare+ for Headphones<br/>
-                    $59.00or$9.83/mo.per month for 6 mo.monthsFootnote*<br/>
-                    Get up to two years of unlimited repairs for accidental damage protection<br/>
-                    and additional tech support
-                </Typography>
-
-                <Button
+        <Box className="cartcheckout">
+            <Typography className='Summary'
+                        sx={{
+                            fontFamily: "'Forum', serif",
+                            fontWeight: 400,
+                            fontSize: {lg: '50px', marginLeft: '2.3vw'},
+                        }}>
+                Order Summary
+            </Typography>
+            <Typography className='Total'
+                        sx={{
+                            fontFamily: "'Forum', serif",
+                            fontWeight: 400,
+                            fontSize: {lg: '18px'},
+                            marginLeft: '2.5vw',
+                            top: '30%',
+                        }}>
+                Subtotal $&nbsp;{total}
+            </Typography>
+            <Divider sx={{zIndex: '10'}}/>
+            <Typography className='ShippingFee'
+                        sx={{
+                            fontFamily: "'Forum', serif",
+                            fontWeight: 400,
+                            fontSize: {lg: '18px'},
+                            marginLeft: '2.5vw',
+                            top: '40%',
+                            whiteSpace: 'pre-wrap',
+                        }}>
+                Shipping Fee $&nbsp; 500
+            </Typography>
+            <Button className='checkoutButton'
                     variant="contained"
-                    disableElevation
-
                     onClick={handleCheckout}
                     sx={{
-                        position: 'absolute',
-                        bgcolor: '#3b3839',
-                        color: 'white',
-                        width: '75%',
-                        height: '8%',
-                        left: '12.5%',
-                        bottom:'-4.5%',
-
+                        fontFamily: "'Forum', serif",
+                        fontWeight: 400,
+                        backgroundColor: '#3b3839',
                         borderRadius: '1px',
                         '&:hover': {
-                            bgcolor: '#e2e1e1',
-                            boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.2)',
-                            color: 'black',
-                        }
-                    }}>
-                    Check Out
-                </Button>
+                            backgroundColor: '#e2e1e1',
+                            boxShadow: '0 0 5px rgba(0, 0, 0, 0.2)'
+                    }
+
+
+                    }}
+            >
+                Check Out
+            </Button>
         </Box>
     );
 }

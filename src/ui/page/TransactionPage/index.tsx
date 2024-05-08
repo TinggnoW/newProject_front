@@ -1,5 +1,4 @@
 import {Box} from "@mui/material";
-import Navbar from "../../component/Navbar.tsx";
 import "../../../css/TransactionPageCss.css"
 import CreditCardForm from "../../component/CreditCard.tsx";
 import {useContext, useEffect, useState} from "react";
@@ -40,15 +39,15 @@ export default function TransactionPage(){
         <>
             <Box className="transactionPage">
                 <div className="transactionPagelayer">
-                    <Navbar/>
                     <div className="transactionPageContainer">
                         {
                             transactionDto
-                                ?<TransactionTable dto={transactionDto}/>
+                                ?<>
+                                <TransactionTable dto={transactionDto}/>
+                                <CreditCardForm dto={transactionDto}/>
+                                </>
                                 :<></>
                         }
-
-                        <CreditCardForm/>
 
                     </div>
 

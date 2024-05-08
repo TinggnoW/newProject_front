@@ -11,7 +11,7 @@ import {TransactionDto} from "../../data/transaction/TransactionDataType.ts";
 
 
 type Props = {
-    dto: TransactionDto ;
+    dto: TransactionDto;
 }
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
@@ -21,7 +21,6 @@ const StyledTableCell = styled(TableCell)(({theme}) => ({
         position: 'sticky',
         top: 0,
         zIndex: 1,
-
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
@@ -32,42 +31,58 @@ const StyledTableCell = styled(TableCell)(({theme}) => ({
 }));
 
 export default function TransactionTable({dto}: Props) {
-    // const [totalpx, setTotalpx] = useState<number>(0);
-    // let total = 0;
-    // const handleCalTotalPx = (dtolist:CartItemData[])=>{
-    //     for(const item of dtolist){
-    //         total+=item.price*item.cartQuantity;
-    //     }return(
-    //         total
-    //     );
-    // }
-    // useEffect(() => {
-    //     setTotalpx(handleCalTotalPx(dto))
-    // }, [dto]);
     return (
         <Box className="transactionPageTable"
              sx={{
-                 width: '70vw',
+                 width: '60vw',
              }}>
             <TableContainer
                 style={{
-                    height:680,
+                    height: 680,
                     overflowY: 'auto',
-                    paddingRight: '1vw',
-                    paddingLeft: '1vw',
+                    paddingRight: '2vw',
+                    paddingLeft: '2vw',
+
                 }}>
                 <Table sx={{
                     marginTop: '3vh',
-                    justifyContent:'center',
+                    justifyContent: 'center',
                     backgroundColor: 'rgb(111,111,111,0.9)',
-
-                }} aria-label="customized table">
+                }}
+                       aria-label="customized table">
                     <TableHead>
                         <TableRow>
                             <StyledTableCell> </StyledTableCell>
-                            <StyledTableCell align="left">PRODUCT</StyledTableCell>
-                            <StyledTableCell align="center">PRICE</StyledTableCell>
-                            <StyledTableCell align="center">QUANTITY</StyledTableCell>
+                            <StyledTableCell
+                                sx={{
+                                    fontFamily: "'Forum', serif",
+                                    fontWeight: 400,
+                                    fontStyle: 'normal'
+                                    }}
+                                align="center"
+                            >
+                                PRODUCT
+                            </StyledTableCell>
+                            <StyledTableCell
+                                sx={{
+                                    fontFamily: "'Forum', serif",
+                                    fontWeight: 400,
+                                    fontStyle: 'normal'
+                                    }}
+                                align="center"
+                            >
+                                    PRICE
+                            </StyledTableCell>
+                            <StyledTableCell
+                                sx={{
+                                    fontFamily: "'Forum', serif",
+                                    fontWeight: 400,
+                                    fontStyle: 'normal'
+                                    }}
+                                align="center"
+                            >
+                                    QUANTITY
+                            </StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

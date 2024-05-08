@@ -1,20 +1,19 @@
-*{
-  margin: 0;
-  padding: 0;
-}
+
 /*HomePage logo Anime*/
 .logo-overlay {
   position: absolute;
-  top: 50%; /* 將元素的上邊緣設置為父元素的中心 */
-  left: 50%; /* 將元素的左邊緣設置為父元素的中心 */
-  transform: translate(-50%, -50%); /* 使用 transform 屬性將元素移動到正中間 */
-  z-index: 1
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: rgba(0, 0, 0,0);
 }
 
 .logo-overlay img {
   width: auto; /* 設置 logo 的寬度 */
   height: auto; /* 根據原始比例調整高度 */
   animation: slideUp 2s ease-in-out forwards;
+  background-color: rgba(0, 0, 0,0);
 }
 
 @keyframes slideUp {
@@ -29,90 +28,10 @@
 /*HomePage Background*/
 .HomePage {
   height: 100vh;
-  background-image: url("../ui/img/HomePage_background.jpg");
+  background-image: url("../ui/img/Background/Home/HomePage_background.jpg");
   background-size: cover;
   background-position: center center;
 }
 
-/*HomePageNavbar*/
-.HomePageNavbar{
-  z-index: 3;
-}
-
-/*HomePage Body*/
-.HomePage-body{
-  display: flex;
-  justify-content: center;
-  background-color: black;
-}
-
-.HomePage-body>*{
- flex-grow: 1;
-}
-
-.supportlist{
-  width:40%;
-  list-style: none;
-  background-color: black;
-  color: white;
-  padding-left: 20px;
-  align-items: center;
-  justify-content: center;
-}
-
-.x-Photographers{
-  width:20% ;
-  background-color: black;
-  color: white;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
 
 
-}
-
-.follow-us{
-  width:40%;
-  padding-left: 30px;
-  background-color: black;
-  color: white;
-  text-align: left;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-}
-
-.social-media{
-  list-style: none;
-  display: block;
-  margin-top: 7px;
-}
-
-.social-media img{
-  margin-right: 10px;
-}
-/*HomePage Body*/
-
-/*HomePage Foorter*/
-.footer{
-  padding-right: 50px;
-  padding-left: 50px;
-  padding-bottom: 5px;
-  background-color: black;
-  color: white;
-  text-align: center;
-}
-
-.footer-items{
-  display: flex;
-  list-style: none;
-  justify-content: center;
-  margin-top: 7px;
-}
-
-.footer-items li{
-  margin-right: 13px;
-}
-
-
-/*HomePage Foorter*/

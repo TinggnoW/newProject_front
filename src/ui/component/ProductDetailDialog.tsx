@@ -3,7 +3,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import {Divider, IconButton, Typography} from "@mui/material";
+import {IconButton, Typography} from "@mui/material";
 import QuantityButton from "./QuantityButton.tsx";
 import CloseIcon from '@mui/icons-material/Close';
 import "../../css/ProductDetails.css"
@@ -11,6 +11,8 @@ import {GetProductbyId} from "../../data/product/getProductbyIdData.Type.ts";
 import {useEffect, useState} from "react";
 import * as CartItemApi from "../../api/CartApi.ts";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import "../../css/fontsCss.css"
+
 
 type Props = {
     open: boolean,
@@ -21,7 +23,7 @@ type Props = {
 }
 
 
-export const DialogComponent = ({ open, handleClose, getProductbyId, productId }:Props) => {
+export const DialogComponent = ({open, handleClose, getProductbyId, productId}: Props) => {
     const [product, setProduct] = useState<GetProductbyId | null>(null); // Declare product state
     const [quantity, setQuantity] = useState<number>(1);
 
@@ -46,9 +48,9 @@ export const DialogComponent = ({ open, handleClose, getProductbyId, productId }
         return null; // Don't render the dialog if it's not open or product data is not available
     }
 
-    const handleAddCart = async ()=>{
+    const handleAddCart = async () => {
         try {
-            await CartItemApi.putCartItem(productId,quantity);
+            await CartItemApi.putCartItem(productId, quantity);
         } catch (error) {
             console.error('Error fetching product data:', error);
         }
@@ -68,63 +70,95 @@ export const DialogComponent = ({ open, handleClose, getProductbyId, productId }
         <div className="productDialog-container">
             <Dialog className="dialog" open={open} onClose={handleClose}
                     sx=
-                        {{'& .MuiDialog-paper':
-                            {
-                                backgroundColor: 'rgb(111,111,111,0.89)',
-                                maxWidth: '70%',
-                                width: '100%',
-                                height: '80%',
-                                borderRadius: '0px',
-                                boxShadow: '0 0 13px rgba(255, 255, 255, 0.36)'
-                            }
+                        {{
+                            '& .MuiDialog-paper':
+                                {
+                                    backgroundColor: 'rgb(111,111,111,0.89)',
+                                    maxWidth: '70%',
+                                    width: '100%',
+                                    height: '80%',
+                                    borderRadius: '0px',
+                                    boxShadow: '0 0 13px rgba(255, 255, 255, 0.36)',
+
+                                }
                         }}>
-                <DialogTitle className="DialogProductName">
-                         {product.productName}
+                <DialogTitle className="DialogProductName"
+                             sx={{
+                                 fontFamily: "'Forum', serif",
+                                 fontWeight: 400,
+                                 fontStyle: 'normal',
+                             }}
+                >
+
+                    {product.productName}
                 </DialogTitle>
                 <DialogContent dividers
-                   sx=
-                       {{
-                           display: 'flex',
-                           alignItems: 'flex-start',
-                        }}>
-                                <img src={product.imageUrl} alt={product.productName} style={{ width: '50%', marginRight: '1vw' }} />
-                                <DialogContentText gutterBottom
-                                    sx=
-                                        {{
-                                            color: 'white',
-                                        }}
-                                >
-                                    {product.description}
-                                    <Divider
-                                        sx=
-                                            {{
-                                                marginBottom: '2vh',
-                                                marginTop:'40vh'
-                                            }}
-                                    />
-                                        <Typography gutterBottom>HKD: {product.productPrice}</Typography>
-                                        <Typography gutterBottom>Stock: {product.stock}</Typography>
+                               sx=
+                                   {{
+                                       display: 'flex',
+                                       alignItems: 'flex-start',
+                                   }}>
+                    <img src={product.imageUrl} alt={product.productName} style={{width: '50%', marginRight: '1vw'}}/>
+                    <DialogContentText gutterBottom
+                                       sx=
+                                           {{
+                                               color: 'white',
+                                               fontFamily: "'Forum', serif",
+                                               fontWeight: 400,
+                                               fontStyle: 'normal',
+                                           }}
+                    >
+                        {product.description}
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <Typography gutterBottom
+                                    sx={{
+                                        fontFamily: "'Forum', serif",
+                                        fontWeight: 400,
+                                        fontStyle: 'normal',
+                                    }}>
+                            HKD:&nbsp;{product.productPrice}
+                        </Typography>
+                        <Typography gutterBottom
+                                    sx={{
+                                        fontFamily: "'Forum', serif",
+                                        fontWeight: 400,
+                                        fontStyle: 'normal',
+                                    }}>
+                            Stock:&nbsp;{product.stock}
+                        </Typography>
 
-                                </DialogContentText>
+                    </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                                <IconButton aria-label="close" onClick={handleClose}
-                                    sx=
-                                        {{
-                                            position: 'absolute',
-                                            right: 8,
-                                            top: 8,
-                                            color: (theme) => theme.palette.grey[500],
-                                        }}>
-                                    <CloseIcon />
-                                </IconButton>
-                    <div className="ProductDetailQuantityButton">
-                        <QuantityButton quantityDto={quantity} handleIncrease={handleIncrease} handleDecrease={handleDecrease}/>
-                        <IconButton
-                            onClick={handleAddCart}
-                                    sx={{
+                    <IconButton aria-label="close" onClick={handleClose}
+                                sx=
+                                    {{
+                                        position: 'absolute',
+                                        right: 8,
+                                        top: 8,
                                         color: (theme) => theme.palette.grey[500],
                                     }}>
+                        <CloseIcon/>
+                    </IconButton>
+                    <div className="ProductDetailQuantityButton">
+                        <QuantityButton quantityDto={quantity} handleIncrease={handleIncrease}
+                                        handleDecrease={handleDecrease}/>
+                        <IconButton
+                            onClick={handleAddCart}
+                            sx={{
+                                color: (theme) => theme.palette.grey[500],
+                            }}>
                             <AddShoppingCartIcon/>
                         </IconButton>
                     </div>

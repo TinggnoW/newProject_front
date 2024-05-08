@@ -6,9 +6,11 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import { EffectCoverflow, Pagination,Autoplay } from 'swiper/modules';
 import {DialogComponent} from '../../component/ProductDetailDialog.tsx'
-import Navbar from "../../component/Navbar.tsx";
 import {getAllProduct, getProductbyId} from '../../../api/ProductApi.ts';
-import {GetAllProduct} from "../../../data/product/getAllProductData.Type.ts"; // Import the API function
+import {GetAllProduct} from "../../../data/product/getAllProductData.Type.ts";
+import NavbarAll from "../../component/NavbarAll.tsx";
+import "../../../index.css"
+
 
 
 export default function ProductPage (){
@@ -41,11 +43,9 @@ export default function ProductPage (){
 
     return(
         <>
-        <header className='ProductPage'>
+        <div className='ProductPage'>
             <div className="layer">
-                <div>
-                    <Navbar/>
-                </div>
+                <NavbarAll/>
                 <div className="swiper-container">
                     <Swiper
                         effect={'coverflow'}
@@ -64,7 +64,7 @@ export default function ProductPage (){
                             pauseOnMouseEnter: true
 
                         }}
-                        pagination={true}
+                        pagination={false}
                         modules={[EffectCoverflow, Pagination,Autoplay]}
                         className="mySwiper"
                     >
@@ -76,13 +76,13 @@ export default function ProductPage (){
                                 <img src={product.imageUrl} alt="product"/>
                                 <div className="overlay-text">
                                     <p>
-                                    {product.productName}<br/>
-                                    HKD {product.productPrice}
+                                    {product.productName}
                                     </p>
                                 </div>
                             </SwiperSlide>
                         ))}
                     </Swiper>
+
                     <DialogComponent
                         open={dialogOpen}
                         handleClose={handleCloseDialog}
@@ -91,7 +91,7 @@ export default function ProductPage (){
                     />
                 </div>
             </div>
-        </header>
+        </div>
         </>
 
 

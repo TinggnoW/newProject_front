@@ -1,13 +1,12 @@
 import "../../../css/ShoppingCartCss.css"
 import ShoppingCartTable from "../../component/ShoppingCartTable.tsx"
-import Navbar from "../../component/Navbar.tsx";
 import * as CartItemApi from "../../../api/CartApi.ts";
 import {useContext, useEffect, useState} from "react";
 import {CartItemData} from "../../../data/product/cartItemData.Type.ts";
 import {UserData} from "../../../data/user/UserData.ts";
 import {LoginUserContext} from "../../../context/LoginUserContext.ts";
 import {Box} from "@mui/material";
-import CartCheckout from "../../component/CartCheckout.tsx";
+import NavbarHomePage from "../../component/NavbarHomePage.tsx";
 
 
 
@@ -35,20 +34,19 @@ export default function ShoppingCart(){
     return(
         <>
 
-        <Box className="ShoppingCart">
-            <Box className="ShoppingCartlayer">
-                <Navbar/>
-                <div className="ShoppingCartContainer">
-                    {
-                        cartItem
-                            ?<ShoppingCartTable dto={cartItem} setCartItemData={setCartItem}/>
-                            :<></>
-                    }
-                    <CartCheckout/>
-                </div>
+            <Box className="ShoppingCart">
+                <Box className="ShoppingCartlayer">
+                    <NavbarHomePage/>
 
+                        {
+                            cartItem
+                                ?<ShoppingCartTable dto={cartItem} setCartItemData={setCartItem}/>
+                                :<></>
+                        }
+
+                </Box>
             </Box>
-        </Box>
+
         </>
 
     );

@@ -45,7 +45,7 @@ export const getAllTransaction = async (tid:string):Promise <TransactionDto> => 
 export const payTransaction = async (tid:string):Promise <TransactionDto> => {
     try{
         const apiUrl = baseURL+`/${tid}/pay`;
-        const response = await axios.patch<TransactionDto>(apiUrl, await getAuthConfig());
+        const response = await axios.patch<TransactionDto>(apiUrl,null, await getAuthConfig());
         return response.data;
 
     } catch (error) {
@@ -57,7 +57,7 @@ export const payTransaction = async (tid:string):Promise <TransactionDto> => {
 export const finishTransactionByTid = async (tid:string):Promise <TransactionDto> => {
     try{
         const apiUrl = baseURL+`/${tid}/finish`;
-        const response = await axios.patch<TransactionDto>(apiUrl, await getAuthConfig());
+        const response = await axios.patch<TransactionDto>(apiUrl,null, await getAuthConfig());
         return response.data;
 
     } catch (error) {
