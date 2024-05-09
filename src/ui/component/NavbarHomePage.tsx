@@ -11,46 +11,45 @@ import "../../index.css"
 export default function NavbarHomePage() {
     const [loggedIn] = useState<boolean>(false);
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
-    const loginUser = useContext <UserData|null|undefined>(LoginUserContext);
+    const loginUser = useContext<UserData | null | undefined>(LoginUserContext);
 
-    const handleMenuToggle = () =>{
+    const handleMenuToggle = () => {
         setMenuOpen(!menuOpen);
     }
-    const handleMenuClose = () =>{
+    const handleMenuClose = () => {
         setMenuOpen(false);
 
     }
 
 
-
-    const renderLoginUser = () =>{
-        if(loginUser){
+    const renderLoginUser = () => {
+        if (loginUser) {
             return (
-            <nav className="navbar">
-                <ul className="nav-list">
-                    <li className="nav-item"><Link to="/shoppingcart">CART</Link></li>
-                    <li className="nav-item"><Link to="/product">PRODUCT</Link></li>
-                    <li className="nav-item"><Link to="/">HOME</Link></li>
-                    <li className="nav-item"
-                        onClick={() => {
-                            FirebaseAuthService.handleSignOut()
-                        }}><Link to="/login">LOGOUT</Link></li>
-                </ul>
-            </nav>
-        )
+                <nav className="navbar">
+                    <ul className="nav-list">
+                        {/*<li className="nav-item"><Link to="/shoppingcart">CART</Link></li>*/}
+                        <li className="nav-item"><Link to="/product">PRODUCT</Link></li>
+                        <li className="nav-item"><Link to="/">HOME</Link></li>
+                        <li className="nav-item"
+                            onClick={() => {
+                                FirebaseAuthService.handleSignOut()
+                            }}><Link to="/login">LOGOUT</Link></li>
+                    </ul>
+                </nav>
+            )
         } else if (loginUser === null) {
             return (
 
-            <nav className="navbar">
-                <ul className="nav-list">
-                    <li className="nav-item"><Link to="/login">LOGIN</Link></li>
-                    <li className="nav-item"><Link to="/product">PRODUCT</Link></li>
-                    <li className="nav-item"><Link to="/">HOME</Link></li>
-                </ul>
-            </nav>
+                <nav className="navbar">
+                    <ul className="nav-list">
+                        <li className="nav-item"><Link to="/login">LOGIN</Link></li>
+                        <li className="nav-item"><Link to="/product">PRODUCT</Link></li>
+                        <li className="nav-item"><Link to="/">HOME</Link></li>
+                    </ul>
+                </nav>
 
             )
-        }else{
+        } else {
             return (
                 <CircularProgress color="inherit"/>
             )
@@ -67,39 +66,80 @@ export default function NavbarHomePage() {
             {loggedIn
                 ?
                 <>
-                <Typography className={menuOpen?"menu-content-open":"menu-container"} onClick={handleMenuToggle}
+                    <Typography className={menuOpen ? "menu-content-open" : "menu-container"} onClick={handleMenuToggle}
 
-                    sx={{
-                    fontFamily: "'Forum', serif",
-                    fontWeight: 400,
-                    fontStyle: 'normal',
-                    }}
-                >
-                     MENU
-                </Typography>
+                                sx={{
+                                    fontFamily: "'Forum', serif",
+                                    fontWeight: 400,
+                                    fontStyle: 'normal',
+                                }}
+                    >
+                        MENU
+                    </Typography>
 
-                <div className="li-container">
-                    <ul className={`menu-items ${menuOpen ? 'active' : ''}`} onClick={handleMenuClose}>
-                        {renderLoginUser()}
-                    </ul>
-                </div>
+                    <div className="li-container">
+                        <ul className={`menu-items ${menuOpen ? 'active' : ''}`} onClick={handleMenuClose}>
+                            {renderLoginUser()}
+                        </ul>
+                    </div>
                 </>
                 :
                 <>
-                <Typography className={menuOpen?"menu-content-open":"menu-container"} onClick={handleMenuToggle}
-                            sx={{
-                                fontFamily: "'Forum', serif",
-                                fontWeight: 400,
-                                fontStyle: 'normal',
-                            }}
-                >
-                    {loginUser && loginUser.email}&nbsp;&nbsp;&nbsp;MENU
-                </Typography>
-                <div className="li-container">
-                    <ul className={`menu-items ${menuOpen ? 'active' : ''}`} onClick={handleMenuClose}>
-                        {renderLoginUser()}
-                    </ul>
-                </div>
+                    <div className="loggedin-container"
+                         style={{
+                             display: "flex",
+                             flexDirection: "row",
+                             justifyContent: "flex-end",
+
+                         }}>
+                        <Typography
+                                    sx={{
+                                        fontFamily: "'Forum', serif",
+                                        fontWeight: 400,
+                                        fontStyle: 'normal',
+                                        color: 'rgba(133,133,133,0.75)',
+                                        textShadow: '1px 1px 1px rgba(255, 255, 255, 0.6), ' +
+                                            '-0.7px -0.7px 1px rgba(133, 133, 133, 0.64)',
+
+                                    }}
+                        >
+                            {loginUser && loginUser.email}
+                        </Typography>
+                        <Typography
+                                    onClick={handleMenuToggle}
+                                    sx={{
+                                        fontFamily: "'Forum', serif",
+                                        fontWeight: 400,
+                                        fontStyle: 'normal',
+                                    }}
+                        >
+
+                            <Link to="/shoppingcart" className='cartNavBar'
+                                  style={{
+                                            textDecoration: 'none',
+                                        }}
+                                >
+                                &nbsp;&nbsp;&nbsp;CART
+                            </Link>
+                        </Typography>
+                        <Typography className={menuOpen ? "menu-content-open" : "menu-container"}
+                                    onClick={handleMenuToggle}
+                                    sx={{
+                                        fontFamily: "'Forum', serif",
+                                        fontWeight: 400,
+                                        fontStyle: 'normal',
+                                    }}
+                        >
+                            &nbsp;&nbsp;&nbsp;MENU
+                        </Typography>
+
+                    </div>
+
+                    <div className="li-container">
+                        <ul className={`menu-items ${menuOpen ? 'active' : ''}`} onClick={handleMenuClose}>
+                            {renderLoginUser()}
+                        </ul>
+                    </div>
                 </>
 
             }
