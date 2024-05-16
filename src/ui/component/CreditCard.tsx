@@ -34,9 +34,7 @@ export default function CreditCardForm({dto}: Props) {
             display: 'grid',
             width: '40vw',
             position: 'relative',
-            // top:'5%',
             paddingLeft:'3rem'
-            // paddingTop:'14rem',
 
         }}>
             <Card
@@ -67,6 +65,7 @@ export default function CreditCardForm({dto}: Props) {
                             sx={{
                                 fontFamily: "'Forum', serif",
                                 fontWeight: 400,
+                                color: 'white',
                             }}>
                             Card number
                         </FormLabel>
@@ -76,6 +75,8 @@ export default function CreditCardForm({dto}: Props) {
                         <FormLabel sx={{
                             fontFamily: "'Forum', serif",
                             fontWeight: 400,
+                            color: 'white',
+
 
                         }}>Expiry date</FormLabel>
                         <Input endDecorator={<CreditCardIcon/>}/>
@@ -84,6 +85,8 @@ export default function CreditCardForm({dto}: Props) {
                         <FormLabel sx={{
                             fontFamily: "'Forum', serif",
                             fontWeight: 400,
+                            color: 'white',
+
                         }}>CVC/CVV</FormLabel>
                         <Input endDecorator={<InfoOutlined/>}/>
                     </FormControl>
@@ -91,10 +94,14 @@ export default function CreditCardForm({dto}: Props) {
                         <FormLabel sx={{
                             fontFamily: "'Forum', serif",
                             fontWeight: 400,
+                            color: 'white',
+
                         }}>Card holder name</FormLabel>
                         <Input sx={{
                             fontFamily: "'Forum', serif",
                             fontWeight: 400,
+                            color: 'white',
+
                         }}
                                placeholder="Enter cardholder's full name"/>
                     </FormControl>

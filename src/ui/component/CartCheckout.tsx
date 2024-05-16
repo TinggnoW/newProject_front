@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Divider from '@mui/joy/Divider';
 import {useNavigate} from "react-router-dom";
 import * as TransactionApi from "../../api/TransactionApi.ts";
-import "../../css/CartCheckoutCss.css"
+import "../../css/CartPageCss/CartCheckoutCss.css"
 
 
 type Props = {
@@ -65,9 +65,7 @@ export default function CartCheckout({total}: Props) {
                         '&:hover': {
                             backgroundColor: '#e2e1e1',
                             boxShadow: '0 0 5px rgba(0, 0, 0, 0.2)'
-                    }
-
-
+                        }
                     }}
             >
                 Check Out

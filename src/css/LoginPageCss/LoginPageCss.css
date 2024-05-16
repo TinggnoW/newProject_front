@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/*LoginBackground*/
+.LoginPageContainer {
+    margin: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    background-image: url('../../ui/img/Background/Login/Login.jpeg');
+    background-size: cover;
+    background-position: center center;
+}
+
+@keyframes lightUp {
+    0% {
+        color: rgba(159, 126, 122, 1);
+        text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6), -1px -1px 1px rgba(111, 111, 111, 0.68);
+    }
+    50% {
+        color: rgba(255, 255, 255, 1);
+        text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8), -2px -2px 10px rgba(255, 255, 255, 0.8);
+    }
+    100% {
+        color: rgba(159, 126, 122, 1);
+        text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6), -1px -1px 1px rgba(111, 111, 111, 0.68);
+    }
+}
+
+.light-up {
+    animation: lightUp 2s infinite;
+}
+
+
+
+

@@ -1,0 +1,36 @@
+/*ShoppingCart Background*/
+.ShoppingCart{
+    position: relative;
+    height: 100vh;
+    background-image: url('../../ui/img/Background/Cart/shoppingcart.webp');
+    background-size: cover;
+    background-position: center center;
+    z-index: 0;
+
+}
+
+/*layer*/
+.ShoppingCartlayer{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(89, 87, 87, 0.81);
+    z-index: 3;
+}
+
+
+/*scrollbar*/
+
+::-webkit-scrollbar {
+    width: 0; /* Width of the scrollbar */
+}
+
+.ShoppingCartContainer{
+    display: flex;
+    flex-direction: row;
+
+}
+
+

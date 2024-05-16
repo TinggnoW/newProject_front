@@ -1,4 +1,4 @@
-import "../../css/ShoppingCartCss.css"
+import "../../css/CartPageCss/ShoppingCartCss.css"
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';

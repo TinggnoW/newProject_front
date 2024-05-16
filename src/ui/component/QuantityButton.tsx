@@ -7,12 +7,9 @@ type Props= {
     quantityDto: number;
     handleIncrease:()=>void;
     handleDecrease:()=>void;
-
-
 }
 
 export default function QuantityButton({quantityDto,handleIncrease,handleDecrease}: Props) {
-
 
     return (
         <div className="button-container">

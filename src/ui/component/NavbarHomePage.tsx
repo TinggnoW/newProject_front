@@ -1,5 +1,5 @@
 import {Link, useLocation} from "react-router-dom";
-import "../../css/NavbarHomepageCss.css";
+import "../../css/Navbar(Home)Css/NavbarHomepageCss.css";
 import {useContext, useEffect, useState} from "react";
 import {UserData} from "../../data/user/UserData.ts";
 import {LoginUserContext} from "../../context/LoginUserContext.ts";
@@ -27,7 +27,6 @@ export default function NavbarHomePage() {
             return (
                 <nav className="navbar">
                     <ul className="nav-list">
-                        {/*<li className="nav-item"><Link to="/shoppingcart">CART</Link></li>*/}
                         <li className="nav-item"><Link to="/product">PRODUCT</Link></li>
                         <li className="nav-item"><Link to="/">HOME</Link></li>
                         <li className="nav-item"
@@ -92,18 +91,18 @@ export default function NavbarHomePage() {
                              justifyContent: "flex-end",
 
                          }}>
-                        <Typography
+                        <Typography className={menuOpen ? "email-menu-open":"email-menu-close"}
                                     sx={{
                                         fontFamily: "'Forum', serif",
                                         fontWeight: 400,
                                         fontStyle: 'normal',
-                                        color: 'rgba(133,133,133,0.75)',
+                                        color:'rgba(133,133,133,0.75)',
                                         textShadow: '1px 1px 1px rgba(255, 255, 255, 0.6), ' +
                                             '-0.7px -0.7px 1px rgba(133, 133, 133, 0.64)',
 
                                     }}
                         >
-                            {loginUser && loginUser.email}
+                            {loginUser && loginUser.email}&nbsp;&nbsp;
                         </Typography>
                         <Typography
                                     onClick={handleMenuToggle}
@@ -114,12 +113,8 @@ export default function NavbarHomePage() {
                                     }}
                         >
 
-                            <Link to="/shoppingcart" className='cartNavBar'
-                                  style={{
-                                            textDecoration: 'none',
-                                        }}
-                                >
-                                &nbsp;&nbsp;&nbsp;CART
+                            <Link to="/shoppingcart" className={menuOpen? 'cart-menu-open':'cartNavBar'} style={{textDecoration: 'none'}}>
+                                &nbsp;CART
                             </Link>
                         </Typography>
                         <Typography className={menuOpen ? "menu-content-open" : "menu-container"}

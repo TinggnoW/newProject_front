@@ -1,0 +1,10 @@
+.DialogProductName{
+    color: White;
+
+}
+
+.ProductDetailQuantityButton{
+    display: flex;
+    flex-direction: row;
+}
+

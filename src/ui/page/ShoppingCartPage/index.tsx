@@ -1,4 +1,4 @@
-import "../../../css/ShoppingCartCss.css"
+import "../../../css/CartPageCss/ShoppingCartCss.css"
 import ShoppingCartTable from "../../component/ShoppingCartTable.tsx"
 import * as CartItemApi from "../../../api/CartApi.ts";
 import {useContext, useEffect, useState} from "react";
@@ -6,7 +6,7 @@ import {CartItemData} from "../../../data/product/cartItemData.Type.ts";
 import {UserData} from "../../../data/user/UserData.ts";
 import {LoginUserContext} from "../../../context/LoginUserContext.ts";
 import {Box} from "@mui/material";
-import NavbarHomePage from "../../component/NavbarHomePage.tsx";
+import NavbarAll from "../../component/NavbarAll.tsx";
 
 
 
@@ -36,7 +36,7 @@ export default function ShoppingCart(){
 
             <Box className="ShoppingCart">
                 <Box className="ShoppingCartlayer">
-                    <NavbarHomePage/>
+                    <NavbarAll/>
 
                         {
                             cartItem

@@ -1,4 +1,4 @@
-import "../../../css/ProductPageCss.css"
+import "../../../css/ProductPageCss/ProductPageCss.css"
 import {useEffect, useState} from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';

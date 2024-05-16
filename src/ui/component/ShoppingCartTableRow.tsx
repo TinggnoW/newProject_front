@@ -98,9 +98,7 @@ export default function ShoppingCartTableRow({data, dto, setCartItemData}: Props
     return (
         <StyledTableRow>
             <StyledTableCell component="th" scope="row">
-                <img src={data.imageUrl}
-
-                     height='160px'/>
+                <img src={data.imageUrl} height='160px'/>
             </StyledTableCell>
             <StyledTableCell
                 style={{
