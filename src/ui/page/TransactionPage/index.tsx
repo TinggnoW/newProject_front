@@ -8,52 +8,61 @@ import * as TransactionApi from "../../../api/TransactionApi.ts";
 import TransactionTable from "../../component/TransactionTable.tsx";
 import {TransactionDto} from "../../../data/transaction/TransactionDataType.ts";
 import {useParams} from "react-router-dom";
+import Loading from "../../component/LoadingPage/Loading.tsx";
 
 
-type Params ={
-    transactionId:string
+type Params = {
+  transactionId: string
 }
 
-export default function TransactionPage(){
-    const params = useParams<Params>();
-    const [transactionDto, setTransactionDto] = useState<TransactionDto|undefined>(undefined);
-    const loginUser = useContext<UserData|null|undefined>(LoginUserContext);
+export default function TransactionPage() {
+  const params = useParams<Params>();
+  const [transactionDto, setTransactionDto] = useState<TransactionDto | undefined>(undefined);
+  const loginUser = useContext<UserData | null | undefined>(LoginUserContext);
+  const [loading, setLoading] = useState<boolean>(true);
 
 
-    const fetchTransactionData = async (tid:string) => {
-        try {
-            const data = await TransactionApi.getAllTransaction(tid);
-            setTransactionDto(data);
-            console.log(data);
-        } catch (error) {
-            console.error('Error fetching product data:', error);
-        }
-    };
+  const fetchTransactionData = async (tid: string) => {
+    try {
+      const data = await TransactionApi.getAllTransaction(tid);
+      setTransactionDto(data);
+      console.log(data);
+    } catch (error) {
+      console.error('Error fetching product data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    useEffect(() => {
+  useEffect(() => {
 
-        if(loginUser&&params.transactionId)
-        {fetchTransactionData(params.transactionId).then();}
+    if (loginUser && params.transactionId) {
+      fetchTransactionData(params.transactionId).then();
+    } else {
+      setLoading(false);
+    }
 
-    }, [loginUser]);
+  }, [loginUser, params.transactionId]);
 
+  if (loading) {
+    return <Loading/>;
+  }
 
-
-    return (
-        <>
-                <Box className="transactionPage">
-                    <div className="transactionPagelayer">
-                        <div className="transactionPageContainer">
-                            {transactionDto ? (
-                                <>
-                                    <TransactionTable dto={transactionDto} />
-                                    <CreditCardForm dto={transactionDto} />
-                                </>
-                            ) : <></>
-                            }
-                        </div>
-                    </div>
-                </Box>
-        </>
-    );
+  return (
+    <>
+      <Box className="transactionPage">
+        <div className="transactionPagelayer">
+          <div className="transactionPageContainer">
+            {transactionDto ? (
+              <>
+                <TransactionTable dto={transactionDto}/>
+                <CreditCardForm dto={transactionDto}/>
+              </>
+            ) : <></>
+            }
+          </div>
+        </div>
+      </Box>
+    </>
+  );
 }

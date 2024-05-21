@@ -10,6 +10,7 @@ import {getAllProduct, getProductbyId} from '../../../api/ProductApi.ts';
 import {GetAllProduct} from "../../../data/product/getAllProductData.Type.ts";
 import NavbarAll from "../../component/NavbarAll.tsx";
 import "../../../index.css"
+import Loading from "../../component/LoadingPage/Loading.tsx";
 
 
 
@@ -17,20 +18,28 @@ export default function ProductPage (){
     const [dialogOpen, setDialogOpen] = useState(false);
     const [products, setProducts] = useState<GetAllProduct[]|undefined>(undefined);
     const [selectedProductId, setSelectedProductId] = useState<number>(0);
+    const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
-        // Fetch product data when component mounts
-        const fetchProductData = async () => {
-            try {
-                const data = await getAllProduct(); // Call the API function
-                setProducts(data); // Update state with fetched data
-            } catch (error) {
-                console.error('Error fetching product data:', error);
-            }
-        };
+        const timer = setTimeout(() => {
+            const fetchProductData = async () => {
+                try {
+                    const data = await getAllProduct(); // Call the API function
+                    setProducts(data); // Update state with fetched data
+                    setLoading(false);
+                } catch (error) {
+                    console.error('Error fetching product data:', error);
+                } finally {
+                    setLoading(false);
+                }
+            };
 
-        fetchProductData().then();
-    }, []);
+            fetchProductData();
+        }, 2000);
+
+        return () => clearTimeout(timer);
+    },[]);
 
     const handleSliderClick = (productId: number) => {
         setSelectedProductId(productId);
@@ -40,6 +49,9 @@ export default function ProductPage (){
         setDialogOpen(false);
     };
 
+    if(loading){
+        return <Loading/>;
+    }
 
     return(
         <>

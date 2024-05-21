@@ -5,6 +5,7 @@ import { ChangeEvent, useState, useEffect } from "react";
 import * as FirebaseAuthService from "../../../authService/FirebaseAuthService.ts";
 import { useNavigate } from "react-router-dom";
 import NavbarAll from "../../component/NavbarAll.tsx";
+import Loading from "../../component/LoadingPage/Loading.tsx";
 
 export default function LoginPage() {
   const [email, setEmail] = useState<string>("");
@@ -12,7 +13,16 @@ export default function LoginPage() {
   const [isLoginFailed, setIsLoginFailed] = useState<boolean>(false);
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [animateText, setAnimateText] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000); // Set loading time to 2 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -32,6 +42,7 @@ export default function LoginPage() {
     } else {
       setIsLoginFailed(true);
       setShowAlert(true);
+      setLoading(false);
     }
   };
 
@@ -43,6 +54,10 @@ export default function LoginPage() {
       return () => clearTimeout(timer); // Cleanup the timer
     }
   }, [showAlert]);
+
+  if (loading || isLoginFailed) {
+    return <Loading/>;
+  }
 
   return (
     <div className="LoginPageContainer">

@@ -2,8 +2,8 @@ import "../../../css/HomePageCss/HomePageCss.css"
 import NavbarHomePage from "../../component/NavbarHomePage.tsx";
 import Footer from "../../component/Footer.tsx";
 import logo from "../../icon/logo/FUJI_Trans.png"
-import HomeLoading from "../../component/LoadingPage/HomeLoading.tsx";
 import {useEffect, useState} from "react";
+import HomeLoading from "../../component/LoadingPage/HomeLoading.tsx";
 
 
 export default function HomePage() {

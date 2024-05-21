@@ -7,6 +7,7 @@ import {UserData} from "../../../data/user/UserData.ts";
 import {LoginUserContext} from "../../../context/LoginUserContext.ts";
 import {Box} from "@mui/material";
 import NavbarAll from "../../component/NavbarAll.tsx";
+import Loading from "../../component/LoadingPage/Loading.tsx";
 
 
 
@@ -14,7 +15,9 @@ export default function ShoppingCart(){
 
     const [cartItem, setCartItem] = useState<CartItemData[]|undefined>(undefined);
     const loginUser = useContext<UserData|null|undefined>(LoginUserContext);
-    // Fetch product data when component mounts
+    const [loading, setLoading] = useState<boolean>(true);
+
+
     const fetchProductData = async () => {
         try {
             const data = await CartItemApi.getCartItem(); // Call the API function
@@ -22,14 +25,24 @@ export default function ShoppingCart(){
             console.log(data);
         } catch (error) {
             console.error('Error fetching product data:', error);
+        }finally {
+            setLoading(false);
         }
     };
 
-    useEffect(() => {
+  useEffect(() => {
+    if (loginUser) {
+      fetchProductData().then();
+    } else {
+      setLoading(false); // Set loading to false if there's no logged-in user
+    }
+  }, [loginUser]);
 
-        if(loginUser){fetchProductData().then();}
 
-    }, [loginUser]);
+  if(loading) {
+        return <Loading/>;
+      }
+
 
     return(
         <>
