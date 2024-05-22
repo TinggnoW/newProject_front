@@ -8,6 +8,7 @@ import {LoginUserContext} from "../../../context/LoginUserContext.ts";
 import {Box} from "@mui/material";
 import NavbarAll from "../../component/NavbarAll.tsx";
 import Loading from "../../component/LoadingPage/Loading.tsx";
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -16,6 +17,7 @@ export default function ShoppingCart(){
     const [cartItem, setCartItem] = useState<CartItemData[]|undefined>(undefined);
     const loginUser = useContext<UserData|null|undefined>(LoginUserContext);
     const [loading, setLoading] = useState<boolean>(true);
+    const navigate = useNavigate();
 
 
     const fetchProductData = async () => {
@@ -34,7 +36,7 @@ export default function ShoppingCart(){
     if (loginUser) {
       fetchProductData().then();
     } else {
-      setLoading(false); // Set loading to false if there's no logged-in user
+      navigate("/login"); // Set loading to false if there's no logged-in user
     }
   }, [loginUser]);
 

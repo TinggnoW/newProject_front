@@ -10,7 +10,6 @@ import Loading from "../../component/LoadingPage/Loading.tsx";
 export default function LoginPage() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [isLoginFailed, setIsLoginFailed] = useState<boolean>(false);
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [animateText, setAnimateText] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
@@ -40,7 +39,6 @@ export default function LoginPage() {
         navigate(-1);
       }, 1500); // Delay navigation to allow the animation to complete
     } else {
-      setIsLoginFailed(true);
       setShowAlert(true);
       setLoading(false);
     }
@@ -55,7 +53,7 @@ export default function LoginPage() {
     }
   }, [showAlert]);
 
-  if (loading || isLoginFailed) {
+  if (loading) {
     return <Loading/>;
   }
 

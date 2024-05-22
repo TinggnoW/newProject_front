@@ -112,10 +112,10 @@ export default function NavbarHomePage() {
                                         fontStyle: 'normal',
                                     }}
                         >
-
+                            {loginUser &&
                             <Link to="/shoppingcart" className={menuOpen? 'cart-menu-open':'cartNavBar'} style={{textDecoration: 'none'}}>
                                 &nbsp;CART
-                            </Link>
+                            </Link>}
                         </Typography>
                         <Typography className={menuOpen ? "menu-content-open" : "menu-container"}
                                     onClick={handleMenuToggle}
